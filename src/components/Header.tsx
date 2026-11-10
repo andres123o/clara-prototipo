@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,12 +14,12 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-10 border-b border-line/70 bg-white/75 backdrop-blur-xl">
-      <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
-        <span className="font-display text-lg font-semibold text-navy">
-          Clara <span className="font-normal text-muted">× Andrés</span>
-        </span>
-        <nav className="flex gap-1 rounded-full bg-subtle p-1 text-sm">
+    <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl">
+      <nav className="flex h-16 items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
+        <Link href="/" aria-label="Inicio" className="shrink-0">
+          <Image src="/clara-logo.svg" alt="Clara" width={101} height={20} priority />
+        </Link>
+        <div className="flex gap-1 overflow-x-auto rounded-full bg-subtle p-1 text-sm">
           {TABS.map((tab) => {
             const active = pathname === tab.href;
             return (
@@ -34,8 +35,8 @@ export function Header() {
               </Link>
             );
           })}
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
   );
 }
