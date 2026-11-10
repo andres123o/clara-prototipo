@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Tokens tomados de clara.com (sys-* y clr-*) */
+@theme {
+  --color-navy: #032257;
+  --color-ink: #00081c;
+  --color-body: #3c4a62;
+  --color-muted: #627087;
+  --color-brand: #0a63d1;
+  --color-brand-soft: #e5efff;
+  --color-action: #86ea63;
+  --color-action-hover: #72c754;
+  --color-page: #ffffff;
+  --color-subtle: #f1f5fb;
+  --color-line: #e4eaf4;
+  --color-inverse: #011131;
+  --color-ai-start: #5353fa;
+  --color-ai-end: #e122f6;
+  --color-ok: #008a40;
+  --color-warn: #b45309;
+  --color-error: #c40326;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-dm-sans), var(--font-inter), system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --radius-control: 12px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+}
+
+/* Fondo difuso en lugar de líneas */
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow::before,
+.glow::after {
+  content: "";
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.2;
+}
+.glow::before {
+  top: -24vw;
+  left: -10vw;
+  background: var(--color-ai-start);
+}
+.glow::after {
+  top: -20vw;
+  right: -12vw;
+  background: var(--color-action);
+}
+
+.pressable {
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 150ms ease,
+    color 150ms ease;
+}
+.pressable:active {
+  transform: scale(0.97);
+}
+
+.rise {
+  animation: rise 360ms var(--ease-out) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
